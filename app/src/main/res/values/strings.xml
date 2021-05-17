@@ -1,0 +1,49 @@
+<resources>
+    <!--    app-->
+    <string name="app_name">Sesh</string>
+    <string name="app_logo">Logo</string>
+    <!--    app-->
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!--    <string name="settings_file_name">SeshSettings</string>-->
+    <string name="LoginButton">Login</string>
+    <string name="SignUpButton">SignUp</string>
+    <string name="LoginHint">LOGIN</string>
+    <string name="PasswordHint">PASSWORD</string>
+    <string name="EmailHint">EMAIL</string>
+    <string name="FnAndSnHint">NAME AND SURNAME</string>
+    <string name="ForgotPassword"><u>Forgot password?</u></string>
+    <string name="PasswordHideButton">Password Hide Button</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Sesh->Ty?</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="AvatarImg">UserAvatarImg</string>
+    <string name="FirstNameHint">FIRSTNAME</string>
+    <string name="LastNameHint">LASTNAME</string>
+    <string name="ConfirmText">Confirmation code has been sent to </string>
+    <string name="confirmButton">Sent Again</string>
+
+    <!--    shared preferences field name-->
+    <string name="sp_access_token">AccessToken</string>
+    <string name="sp_refresh_token">RefreshToken</string>
+    <string name="sp_is_login">IsLogin</string>
+    <!--    shared preferences field name-->
+
+    <!--    menu-->
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_logout">Sign Out</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_security">Security</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_friends">Friends</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    menu-->
+
+</resources>
