@@ -8,6 +8,9 @@ import com.example.sesh.models.User;
 import com.example.sesh.models.UserInfo;
 import com.example.sesh.models.UserSignIn;
 
+import java.io.File;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -40,5 +43,7 @@ public interface ApiEndPoints {
     @GET(baseControler+"accesstoken")
     public Call<TokenPair> getAccessToken(@Header("Authorization") String token);
 
+    @GET("api/v1/img/getuserphoto/{id}")
+    public Call<ResponseBody> getUserImage(@Path("id")long id);
 
 }

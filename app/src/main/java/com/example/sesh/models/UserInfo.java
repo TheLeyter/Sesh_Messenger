@@ -20,11 +20,11 @@ public class UserInfo {
     @Expose
     private String lastName;
 
-    @SerializedName("avatar")
+    @SerializedName("userPhot")
     @Expose
-    private String avatar;
+    private boolean avatar;
 
-    public UserInfo(long id, String username, String firstName, String lastName, String avatar){
+    public UserInfo(long id, String username, String firstName, String lastName, boolean avatar){
         this.id = id;
         this.username  = username;
         this.firstName = firstName;
@@ -43,11 +43,11 @@ public class UserInfo {
                 '}';
     }
 
-    public String getAvatar() {
+    public boolean getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(boolean avatar) {
         this.avatar = avatar;
     }
 

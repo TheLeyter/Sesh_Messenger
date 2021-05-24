@@ -3,6 +3,8 @@ package com.example.sesh.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sesh.R;
+import com.example.sesh.models.TokenPair;
 import com.example.sesh.models.UserInfo;
 import com.example.sesh.service.ApiCoreService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,6 +31,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.io.InputStream;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView menuNickName;
     private TextView menuFullName;
     private DrawerLayout drawer;
+
+    private TokenPair jwtTokens;
 
     private SharedPreferences settings = null;
 
@@ -77,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         View headerUser = navigationView.getHeaderView(0);
         menuNickName = (TextView)headerUser.findViewById(R.id.menu_nick_name);
         menuFullName = (TextView)headerUser.findViewById(R.id.menu_full_user_name);
+        menuAvatar = (ImageView)headerUser.findViewById((R.id.menu_img));
 
         ApiCoreService.getInstance()
                 .getEndPoints()
@@ -84,10 +93,93 @@ public class MainActivity extends AppCompatActivity {
                 .enqueue(new Callback<UserInfo>() {
                     @Override
                     public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
-                        Log.d(TAG,response.toString());
-                        Log.d(TAG,response.body().toString());
-                        if(response.body().getAvatar()==null){
+//                        if(response.code()==401){
+//                            ApiCoreService.getInstance().getEndPoints().getAccessToken("Bearer " + settings.getString(getString(R.string.sp_refresh_token),""))
+//                                    .enqueue(new Callback<TokenPair>() {
+//                                        @Override
+//                                        public void onResponse(Call<TokenPair> calls, Response<TokenPair> response) {
+//                                            if(response.code()!=200){
+//                                                settings.edit().putBoolean(getString(R.string.sp_is_login),false);
+//                                                settings.edit()
+//                                                        .remove(getString(R.string.sp_refresh_token))
+//                                                        .remove(getString(R.string.sp_access_token))
+//                                                        .apply();
+//
+//                                                Intent logOut = new Intent(MainActivity.this,SignIn.class);
+//                                                MainActivity.this.startActivity(logOut);
+//                                                MainActivity.this.finish();
+//                                            }
+//                                            else{
+//                                                jwtTokens = response.body();
+//                                                settings.edit()
+//                                                        .putString(getString(R.string.sp_refresh_token),jwtTokens.getRefreshToken())
+//                                                        .putString(getString(R.string.sp_access_token),jwtTokens.getAccessToken())
+//                                                        .apply();
+//                                            }
+//                                        }
+//
+//                                        @Override
+//                                        public void onFailure(Call<TokenPair> call, Throwable t) {
+//
+//                                        }
+//                                    });
+//
+//                            call.request().newBuilder().addHeader("Authorization","Bearer "+ jwtTokens.getRefreshToken()).build();
+//                            call.enqueue(new Callback<UserInfo>() {
+//                                        @Override
+//                                        public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+//                                            if(response.body().getAvatar()==false){
+//                                                Toast.makeText(MainActivity.this,"Avatar null",Toast.LENGTH_LONG).show();
+//                                            }
+//                                            else{
+//                                                ApiCoreService.getInstance()
+//                                                        .getEndPoints()
+//                                                        .getUserImage(response.body().getId())
+//                                                        .enqueue(new Callback<ResponseBody>() {
+//                                                            @Override
+//                                                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                                                                InputStream is = response.body().byteStream();
+//                                                                Bitmap bmp = BitmapFactory.decodeStream(is);
+//                                                                menuAvatar.setImageBitmap(bmp);
+//                                                            }
+//
+//                                                            @Override
+//                                                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//                                                            }
+//                                                        });
+//                                            }
+//                                            menuNickName.setText(response.body().getUsername());
+//                                            menuFullName.setText(response.body().getFirstName() +" " + response.body().getLastName());
+//                                        }
+//
+//                                        @Override
+//                                        public void onFailure(Call<UserInfo> call, Throwable t) {
+//
+//                                        }
+//                                    });
+//                        }
+                        Log.d("MAinUserINfo----->",response.body().toString());
+                        if(response.body().getAvatar()==false){
                             Toast.makeText(MainActivity.this,"Avatar null",Toast.LENGTH_LONG).show();
+                        }
+                                            else{
+                            ApiCoreService.getInstance()
+                                    .getEndPoints()
+                                    .getUserImage(response.body().getId())
+                                    .enqueue(new Callback<ResponseBody>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                            InputStream is = response.body().byteStream();
+                                            Bitmap bmp = BitmapFactory.decodeStream(is);
+                                            menuAvatar.setImageBitmap(bmp);
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                        }
+                                    });
                         }
                         menuNickName.setText(response.body().getUsername());
                         menuFullName.setText(response.body().getFirstName() +" " + response.body().getLastName());
