@@ -3,6 +3,7 @@ package com.example.sesh.service;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import utils.RefreshTokenInterceptor;
 
 public class ApiCoreService {
     private static  ApiCoreService mInstance;
@@ -12,11 +13,13 @@ public class ApiCoreService {
 
     private ApiCoreService(){
         client = new OkHttpClient.Builder()
-                .addInterceptor()
+                .addInterceptor(new RefreshTokenInterceptor())
+                .build();
 
         mRetrofit = new  Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build();
     }
 

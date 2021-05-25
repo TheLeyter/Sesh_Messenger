@@ -7,13 +7,13 @@ import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-public class RefreshTokenInerceptor implements Interceptor {
+public class RefreshTokenInterceptor implements Interceptor {
 
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
 
-
+        //доделать перехватчик
 
         return null;
     }
