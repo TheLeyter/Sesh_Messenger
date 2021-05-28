@@ -1,6 +1,10 @@
 package com.example.sesh.service;
 
 import android.content.Context;
+import android.content.res.Resources;
+
+import com.example.sesh.App;
+import com.example.sesh.R;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -9,7 +13,7 @@ import utils.RefreshTokenInterceptor;
 
 public class ApiCoreService {
     private static  ApiCoreService mInstance;
-    private static String BASE_URL = "http://192.168.1.101:5000/";
+    private static String BASE_URL = App.getContext().getString(R.string.base_auth_api_url);
     private Retrofit mRetrofit;
     private OkHttpClient client;
 

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
-        app:layout_constraintTop_toBottomOf="@+id/prifile_firstName" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_firstName" />
 
     <TextView
         android:id="@+id/prifile_lastName_desc"
@@ -20,10 +20,10 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
-        app:layout_constraintTop_toBottomOf="@+id/prifile_lastName" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_lastName" />
 
     <TextView
-        android:id="@+id/prifile_firstName"
+        android:id="@+id/profile_firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline45" />
 
     <TextView
-        android:id="@+id/prifile_lastName"
+        android:id="@+id/profile_lastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -128,7 +128,7 @@
         app:layout_constraintGuide_percent="0.56" />
 
     <TextView
-        android:id="@+id/prifile_email"
+        android:id="@+id/profile_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -143,7 +143,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
-        app:layout_constraintTop_toBottomOf="@+id/prifile_email" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_email" />
 
     <View
         android:id="@+id/divider"

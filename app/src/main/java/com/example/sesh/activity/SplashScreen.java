@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.example.sesh.App;
 import com.example.sesh.R;
 import com.example.sesh.service.ApiCoreService;
 
@@ -28,6 +29,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        App app = new App();
         setContentView(R.layout.activity_splash_screen);
         overridePendingTransition(R.anim.in,R.anim.out);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
