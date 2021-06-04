@@ -149,7 +149,7 @@ public class ProfileFragment extends Fragment {
 
                                             @Override
                                             public void onFailure(Call<String> call, Throwable t) {
-                                                Log.d(TAG, "Error to uploading img!!!");
+                                                Log.d(TAG, t.getMessage());
                                                 Toast.makeText(getContext(), "Failure to uploading img", Toast.LENGTH_LONG);
                                             }
                                         });
