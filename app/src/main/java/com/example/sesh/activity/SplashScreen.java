@@ -42,32 +42,36 @@ public class SplashScreen extends AppCompatActivity {
                     SplashScreen.this.startActivity(intent);
                     SplashScreen.this.finish();
                 }
-                else{
-                    ApiCoreService.getInstance()
-                            .getEndPoints()
-                            .validRefToken("Bearer "+ settings.getString(getString(R.string.sp_refresh_token),""))
-                            .enqueue(new Callback<String>() {
-                                @Override
-                                public void onResponse(Call<String> call, Response<String> response) {
-                                    if(response.code()!=200){
-                                        Intent intent = new Intent(SplashScreen.this,SignIn.class);
-                                        SplashScreen.this.startActivity(intent);
-                                        SplashScreen.this.finish();
+                else if(ApiCoreService.isOnline(SplashScreen.this)) {
+                        ApiCoreService.getInstance()
+                                .getEndPoints()
+                                .validRefToken("Bearer " + settings.getString(getString(R.string.sp_refresh_token), ""))
+                                .enqueue(new Callback<String>() {
+                                    @Override
+                                    public void onResponse(Call<String> call, Response<String> response) {
+                                        if (response.code() != 200) {
+                                            Intent intent = new Intent(SplashScreen.this, SignIn.class);
+                                            SplashScreen.this.startActivity(intent);
+                                            SplashScreen.this.finish();
+                                        } else {
+                                            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                                            SplashScreen.this.startActivity(intent);
+                                            SplashScreen.this.finish();
+                                        }
                                     }
-                                    else{
-                                        Intent intent = new Intent(SplashScreen.this,MainActivity.class);
-                                        SplashScreen.this.startActivity(intent);
-                                        SplashScreen.this.finish();
-                                    }
-                                }
 
-                                @Override
-                                public void onFailure(Call<String> call, Throwable t) {
-                                    Log.d(TAG,t.getMessage());
-                                }
-                            });
+                                    @Override
+                                    public void onFailure(Call<String> call, Throwable t) {
+                                        Log.d(TAG, t.getMessage());
+                                    }
+                                });
+                    }
+                else{
+                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                    SplashScreen.this.startActivity(intent);
+                    SplashScreen.this.finish();
                 }
-            }
+                }
         },500);
     }
 }

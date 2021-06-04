@@ -2,6 +2,9 @@ package com.example.sesh.service;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import com.example.sesh.App;
 import com.example.sesh.R;
@@ -38,5 +41,21 @@ public class ApiCoreService {
 
     public ApiEndPoints getEndPoints(){
         return mRetrofit.create(ApiEndPoints.class);
+    }
+
+    public static boolean isOnline(Context context){
+
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting())
+        {
+            Toast.makeText(context,"Online mode!",Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        Toast.makeText(context,"Offline mode!",Toast.LENGTH_LONG).show();
+        return false;
+
     }
 }

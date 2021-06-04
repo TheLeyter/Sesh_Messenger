@@ -10,12 +10,14 @@ import com.example.sesh.models.UserSignIn;
 
 import java.io.File;
 
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiEndPoints {
@@ -45,5 +47,8 @@ public interface ApiEndPoints {
 
     @GET("api/v1/img/getuserphoto/{id}")
     public Call<ResponseBody> getUserImage(@Path("id")long id);
+
+    @POST("api/v1/img/setuserphoto")
+    public Call<String> setUserPhoto(@Header("Authorization") String token,@Part MultipartBody.Part image);
 
 }
