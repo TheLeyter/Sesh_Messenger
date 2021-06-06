@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -108,17 +109,8 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        View v = inflater.inflate(R.layout.fragment_profile, container, false);
-
-        img = v.findViewById(R.id.profile_user_photo);
-        userName = v.findViewById(R.id.profile_UserName);
-        email = v.findViewById(R.id.profile_email);
-        firstName = v.findViewById(R.id.profile_firstName);
-        lastName = v.findViewById(R.id.profile_lastName);
-        addPhotoBtn = v.findViewById(R.id.profile_addPhoto_bytton);
+    public void onViewCreated(@NonNull @NotNull View view, @androidx.annotation.Nullable @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         addPhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +136,10 @@ public class ProfileFragment extends Fragment {
                                             public void onResponse(Call<String> call, Response<String> response) {
                                                 if (response.code() != 200) {
                                                     Toast.makeText(getContext(), "Failure to uploading img", Toast.LENGTH_LONG);
-                                                } else img.setImageURI(uri);
+                                                } else{
+                                                    img.setImageURI(uri);
+                                                    ((ImageView) getActivity().findViewById(R.id.menu_img)).setImageURI(uri);
+                                                }
                                             }
 
                                             @Override
@@ -157,6 +152,21 @@ public class ProfileFragment extends Fragment {
                         });
             }
         });
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        img = v.findViewById(R.id.profile_user_photo);
+        userName = v.findViewById(R.id.profile_UserName);
+        email = v.findViewById(R.id.profile_email);
+        firstName = v.findViewById(R.id.profile_firstName);
+        lastName = v.findViewById(R.id.profile_lastName);
+        addPhotoBtn = v.findViewById(R.id.profile_addPhoto_bytton);
 
         return v;
     }

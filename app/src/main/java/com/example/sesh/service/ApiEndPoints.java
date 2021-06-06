@@ -37,8 +37,8 @@ public interface ApiEndPoints {
     @GET("api/v1/account/verification/{code}")
     public Call<TokenPair> confirmAcc(@Header("Authorization") String token,@Path("code") String code);
 
-    @GET("api/v1/account/validtoken")
-    public Call<String> validRefToken(@Header("Authorization") String token);
+//    @GET("api/v1/account/validtoken")
+//    public Call<String> validRefToken(@Header("Authorization") String token);
 
     @GET("api/v1/account/signout")
     public Call<String> signOut(@Header("Authorization") String token);

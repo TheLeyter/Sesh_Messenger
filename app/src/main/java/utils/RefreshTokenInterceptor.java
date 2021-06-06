@@ -83,6 +83,12 @@ public class RefreshTokenInterceptor implements Interceptor {
             req = req.newBuilder()
                     .header("Authorization","Bearer "+settings.getString(App.getContext().getString(R.string.sp_access_token),""))
                     .build();
+            try {
+                if(res != null) res.close();
+
+            } catch (Exception exception){
+
+            }
 
             res = chain.proceed(req);
 

@@ -2,8 +2,8 @@
     <!--    app-->
     <string name="app_name">Sesh</string>
     <string name="app_logo">Logo</string>
-<!--    <string name="base_auth_api_url">http://192.168.1.101:5000/</string>< desktop-->
-    <string name="base_auth_api_url">http://192.168.43.23:5000/</string><!--notebook-->
+    <string name="base_auth_api_url">http://192.168.1.101:5000/</string> <!--desktop-->
+<!--    <string name="base_auth_api_url">http://192.168.43.23:5000/</string>&lt;!&ndash;notebook&ndash;&gt;-->
 <!--    <string name="base_auth_api_url">http://192.168.42.86:5000/</string>//mobile-->
     <!--    app-->
 

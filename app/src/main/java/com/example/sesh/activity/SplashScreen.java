@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.sesh.App;
 import com.example.sesh.R;
+import com.example.sesh.models.TokenPair;
 import com.example.sesh.service.ApiCoreService;
 
 import retrofit2.Call;
@@ -25,14 +26,16 @@ public class SplashScreen extends AppCompatActivity {
     private final String TAG = "SplashScreen----->";
 
     private SharedPreferences settings;
+    private SharedPreferences.Editor settingsEditor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        App app = new App();
+
         setContentView(R.layout.activity_splash_screen);
         overridePendingTransition(R.anim.in,R.anim.out);
         settings = PreferenceManager.getDefaultSharedPreferences(this);
+        settingsEditor = settings.edit();
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -45,15 +48,18 @@ public class SplashScreen extends AppCompatActivity {
                 else if(ApiCoreService.isOnline(SplashScreen.this)) {
                         ApiCoreService.getInstance()
                                 .getEndPoints()
-                                .validRefToken("Bearer " + settings.getString(getString(R.string.sp_refresh_token), ""))
-                                .enqueue(new Callback<String>() {
+                                .getAccessToken("Bearer " + settings.getString(getString(R.string.sp_refresh_token), ""))
+                                .enqueue(new Callback<TokenPair>() {
                                     @Override
-                                    public void onResponse(Call<String> call, Response<String> response) {
+                                    public void onResponse(Call<TokenPair> call, Response<TokenPair> response) {
                                         if (response.code() != 200) {
                                             Intent intent = new Intent(SplashScreen.this, SignIn.class);
                                             SplashScreen.this.startActivity(intent);
                                             SplashScreen.this.finish();
                                         } else {
+//                                            settingsEditor.putString(getString(R.string.sp_refresh_token),response.body().getRefreshToken());
+//                                            settingsEditor.putString(getString(R.string.sp_access_token),response.body().getAccessToken());
+
                                             Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                                             SplashScreen.this.startActivity(intent);
                                             SplashScreen.this.finish();
@@ -61,7 +67,7 @@ public class SplashScreen extends AppCompatActivity {
                                     }
 
                                     @Override
-                                    public void onFailure(Call<String> call, Throwable t) {
+                                    public void onFailure(Call<TokenPair> call, Throwable t) {
                                         Log.d(TAG, t.getMessage());
                                     }
                                 });
